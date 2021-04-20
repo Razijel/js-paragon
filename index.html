@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <table id="table-paragon"style="width:100%">
+        <tr>
+            <th>Nazwa</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+    </table><br>
+    <div>
+        <form id="form-paragon">
+            <label for="name">Nazwa:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="count">Ilość:</label><br>
+            <input type="text" id="count" name="count"><br>
+            <label for="price">Cena:</label><br>
+            <input type="text" id="price" name="price"><br>
+            <input type="submit" onClick="submitForm()" value="Submit">
+            <button onclick="submitForm()">Click me</button>
+        </form>
+    </div>
+</body>
+<script>
+
+    function submitForm(){
+        var form = document.getElementById("form-paragon");
+        const name = getFormNameInput(form);
+        const count = getFormCountInput(form);
+        const price = getFormPriceInput(form);
+        var item = new Item(name, count, price);
+        item.saveObject();
+
+    }
+
+    function Item(name, count, pirce){
+        this.name = name;
+        this.count = count;
+        this.price = price;
+        this.saveObject = () => {
+            alert("Zapis obiektu w jsonie i storage cos tam");
+        }
+    }
+
+    function getFormNameInput(form) {
+        let name = form.elements[0].value;
+        if (!is_string(name)){
+            alert("Wprowadzono niepoprawną nazwę produktu.");
+            name = null;
+        return name;
+        }
+    }
+    function getFormCountInput(form) {
+        let count = form.elements[1].value;
+        if(!is_integer(count)){
+            alert("Wprowadzono niepoprwną wartość pola count.");
+            count = null;
+        }
+        return count;
+    }
+
+    function getFormPriceInput(form) {
+        let price = form.elements[2].value;
+        if(!typeof price === 'number'){
+            alert("Wprowadzono niepoprawną wartość pola price.");
+            price = null;
+        }
+        return price;
+    }
+
+    function is_string(input) {
+        let is_string = false;
+        if (typeof input === 'string' || input instanceof String)
+            is_string = true;
+        return is_string;
+    }
+
+    function is_integer(input){
+        let is_int = false;
+        if(input === +input && input === (input|0)) {
+            is_int = true;
+        }
+        return is_int
+    }   
+</script>
