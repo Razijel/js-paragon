@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
+  <title></title>
+</head>
+
+<body>
+	<script src="script.js" type="text/javascript"></script>
+
+	<script>
+		window.onload = function(){
+			document.getElementById("data_show").innerHTML = dateTime;
+		}
+	</script>
+
+	<p id="data_show"></p>
+
+	<table id="paragon">
+   		<thead>
+
+   		</thead>
+   		<tbody id="paragon_body">
+   			<tr class="input_line">
+	         	<th>Lp</th> <th>Nazwa</th> <th>Ilość</th> <th>Cena</th> <th>Suma</th>
+	     	</tr>
+	     	
+      		<tr class="input_line">
+		    	<td>1</td> <td>Jabłko</td> <td>2</td> <td class="cena_sztuka">2.50</td> <td class="cena_suma">5.00</td>
+		    </tr>
+		    <tr class="input_line" onclick="alert('hi');">
+		    	<td>2</td> <td>Banan</td> <td>3</td> <td class="cena_sztuka">1.70</td> <td class="cena_suma">5.10</td>
+		    </tr>
+		    <tr class="input_line">
+		       	<td>3</td> <td>Arbuz</td> <td>1</td> <td class="cena_sztuka">6.40</td> <td class="cena_suma">6.40</td>
+		    </tr>
+		    <tr class="input_line">
+		        <td>4</td> <td>Cytryna</td> <td>3</td> <td class="cena_sztuka">1.20</td> <td class="cena_suma">3.60</td>
+		    </tr>
+		
+		    <tr>
+		       <td></td> <td></td> <td></td> <td style="text-align: right">Razem:</td> <td class="cena_razem">20.10</td>
+		    </tr>
+   		</tbody>
+	</table>
+
+	<div id="przyciski">
+		<button onclick="openForm()">
+			Dodaj nowy produkt
+		</button>
+		<button style="float: right">
+			Potwierdź paragon
+		</button>
+	</div>
+
+	<div class="form-popup" id="myForm">
+  		<form class="form-container" method="post" onsubmit="">
+    	<h1>Dodaj do paragonu</h1>
+
+    	<label for="nazwa_form"><b>Nazwa</b></label>
+    	<input type="text" id="nazwa_input" placeholder="podaj nazwę produktu" name="nazwa_form" required>
+
+    	<label for="ilosc_form"><b>Ilość</b></label>
+    	<input type="text" id="ilosc_input" placeholder="podaj ilość" name="ilosc_form" required>
+
+    	<label for="cena_form"><b>Cena</b></label>
+    	<input type="text" id="cena_input" placeholder="podaj cenę" name="cena_form" required>
+
+    	<button type="submit" class="btn">Dodaj</button>
+    	<button type="button" class="btn cancel" onclick="closeForm()">Anuluj</button>
+  		</form>
+	</div>
+
+</body>
+</html>
