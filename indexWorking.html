@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="stylesPD2.css">
+    <meta charset="utf-8">
+</head>
+<body>
+    <table id="table-paragon" style="width:100%">
+        <tr>
+            <th>Nazwa</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+    </table><br>
+    <div>
+        <form id="formParagon">
+            <label for="name">Nazwa:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="count">Ilość:</label><br>
+            <input type="number" id="count" name="count"><br>
+            <label for="price">Cena:</label><br>
+            <input type="number" id="price" name="price"><br>
+            <input type="button" onClick="submitForm()" value="Dodaj do listy">
+            <!--<button onclick="submitForm()">Click me</button>-->
+            <!--<button onclick="addRow('table-paragon')">Add row</button>-->
+        </form>
+    </div>
+</body>
+<script>
+    function submitForm(){
+        var formEl = document.forms.formParagon;
+        var formData = new FormData(formEl);
+        var name = formData.get('name');
+        var count = formData.get('count');
+        var price = formData.get('price');
+        var item = new Item(name, count, price);
+
+        
+        var table = document.getElementById('table-paragon');
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            //var element1 = document.createElement("text");
+            //element1.type = "text";
+            //element1.name= "itemName";
+            //element1.value = name;
+            //cell1.appendChild(element1);
+            cell1.innerHTML = name;
+
+            var cell2 = row.insertCell(1);
+            //var element2 = document.createElement("text");
+            //element2.type = "number";
+            //element2.name= "itemCount";
+            //element2.value = count;
+            //cell2.appendChild(element2);
+            cell2.innerHTML = count;
+
+            var cell3 = row.insertCell(2);
+            //var element3 = document.createElement("text");
+            //element3.type = "number";
+            //element3.name = "itemPrice";
+            //element3.value = price;
+            //cell3.appendChild(element3);
+            cell3.innerHTML = price;
+            
+    }
+
+    function Item(name, count, price){
+        this.name = setName(name);
+        this.count = setCount(count);
+        this.price = setPrice(price);
+
+        this.saveObject = () => {
+            var json = JSON.stringify(this);
+            sessionStorage.setItem('paragon', json);
+            return json;
+        }
+
+        this.loadObject = () => {
+            var obj = JSON.parse(sessionStorage.paragon);
+            this.name = obj.name;
+            this.count = obj.count;
+            this.price = obj.price;
+            return this;
+        }
+    }
+
+    function setName(name){
+        if(!is_string(name)){
+            alert("Wprowadzono niepoprawną nazwę produktu.");
+            name = null;
+        }
+        return name;
+    }
+
+    function setCount(count){
+        count = parseInt(count);
+        if(!Number.isInteger(count)){
+            alert("Wprowadzono niepoprwną wartość pola count.");
+            count = null;
+        }
+        return count;
+    }
+
+    function setPrice(price){
+        price = parseFloat(price);
+        if(!typeof price === 'number'){
+            alert("Wprowadzono niepoprawną wartość pola price.");
+            price = null;
+        }
+        return price;
+    }
+
+
+    function is_string(input) {
+        let is_string = false;
+        if (typeof input === 'string' || input instanceof String)
+            is_string = true;
+        return is_string;
+    }
+
+/*
+    function addRow(tableID) {
+
+            var table = document.getElementById(tableID);
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("text");
+            element1.type = "text";
+            element1.name="itemName";
+            cell1.appendChild(element1);
+
+            var cell1 = row.insertCell(1);
+            var element1 = document.createElement("text");
+            element1.type = "text";
+            element1.name="itemCount";
+            cell2.appendChild(element2);
+
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("text");
+            element2.type = "text";
+            element2.name = "itemPrice";
+            cell3.appendChild(element3);
+        }
+        */
+
+</script>
